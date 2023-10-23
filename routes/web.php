@@ -17,3 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [ProductController::class, 'index'])->name('index');
 
 Route::post('/save_product', [ProductController::class, 'save_product'])->name('save_product');
+
+
+Route::get('/types', [ProductController::class, 'view_types'])->name('types');
+
+Route::post('/save_type', [ProductController::class,'save_type'])->name('save_type');

@@ -55,8 +55,11 @@
 
                             <div class="form-group">
                                 <label for="type">Type:</label>
-                                <input type="text" class="form-control" id="type" placeholder="Enter type"
-                                    name="type">
+                                <select name="type" class="form-control" id="type">
+                                    @foreach ($types as $item)
+                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
 
                             <div class="form-group">

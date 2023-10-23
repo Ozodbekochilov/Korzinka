@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Type;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
     function index()
     {
-        return view('welcome', ['products' => Product::all()]);
+        return view('welcome', ['products' => Product::all(), 'types' => Type::all()]);
     }
 
     function save_product(Request $request)
@@ -26,6 +27,21 @@ class ProductController extends Controller
             'image' => $path,
         ]);
 
+
+        return back();
+    }
+
+    function view_types()
+    {
+        return view('types', ['types' => Type::all()]);
+    }
+
+    function save_type(Request $req)
+    {
+
+        Type::create([
+            'name' => $req->name
+        ]);
 
         return back();
     }

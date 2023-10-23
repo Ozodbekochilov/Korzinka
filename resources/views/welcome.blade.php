@@ -100,7 +100,7 @@
                     <td>{{ $item->id }}</td>
                     <td>{{ $item->name }}</td>
                     <td>{{ $item->price }}</td>
-                    <td>{{ $item->type }}</td>
+                    <td>{{ $item->get_type->name }}</td>
                     <td><img src="{{ asset($item->image) }}" alt="" width="200px" height="100px"></td>
                     <td><button class="btn btn-md btn-danger">Delete</button><button
                             class="btn btn-md btn-info">Edit</button></td>

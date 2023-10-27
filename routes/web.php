@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\ArticlesController;
+use App\Http\Controllers\ModelsController;
 use App\Http\Controllers\ProductController;
+use App\Models\Product;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,11 +18,42 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [ProductController::class, 'index'])->name('index');
+Route::get(
+    '/products',
+    function () {
+        return view('products', ['products' => Product::all()]);
+    }
+)->name('/');
 
-Route::post('/save_product', [ProductController::class, 'save_product'])->name('save_product');
+Route::post('/save_product', function (Request $request) {
+
+    Product::create([
+        'name' => $request->name,
+    ]);
+
+    return back();
+});
+
+Route::get('/delete_product/{id}', function ($id) {
+    Product::where('id', '=', $id)->first()->delete();
+    return back();
+});
+
+Route::get('/edit_product/{id}', function ($id) {
+    return view('edit_product', ['product' => Product::where('id', '=', $id)->first()]);
+});
+
+Route::post('/save_edit_product/{id}', function ($id, Request $request) {
+
+    Product::where('id', '=', $id)->first()->update([
+        'name' => $request->name,
+    ]);
+
+    return redirect()->route('/');
+});
 
 
-Route::get('/types', [ProductController::class, 'view_types'])->name('types');
 
-Route::post('/save_type', [ProductController::class,'save_type'])->name('save_type');
+Route::get('/models', [ModelsController::class, 'index']);
+
+Route::post('/save_model',[ModelsController::class,'save_model']);

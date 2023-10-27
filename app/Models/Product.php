@@ -8,17 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
-    protected $table = "products";
+
+    protected $table = 'products';
+
+
     public $timestamps = false;
+    
     protected $fillable = [
         'name',
-        'price',
-        'type',
-        'image'
     ];
-
-    function get_type()
-    {
-        return $this->hasOne(Type::class, 'id', 'type');
-    }
 }
